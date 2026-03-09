@@ -24,11 +24,9 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="">
+    <div>
       <div className="mb-6">
-        <h3 className="text-2xl font-semibold mb-2">
-          Bem vindo(a) de volta! 👋
-        </h3>
+        <h3 className="subtitle">Bem vindo(a) de volta! 👋</h3>
         <p className="text-[var(--grey-c3)]">
           Entre na sua conta usando email e senha.
         </p>
@@ -64,7 +62,7 @@ const LoginForm = () => {
         </button>
         <span className="text-base mt-12 font-medium">
           Não tem uma conta?{' '}
-          <Link to="/register" className="text-blue-600 font-semibold">
+          <Link to="/register" className="link">
             Cadastre-se
           </Link>
         </span>

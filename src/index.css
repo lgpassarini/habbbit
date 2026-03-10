@@ -81,6 +81,14 @@
   }
 
   .link {
-    @apply text-blue-600 font-semibold
+    @apply text-blue-600 font-semibold;
+  }
+
+  .inputError {
+    @apply !border-red-500;
+  }
+
+  button:disabled {
+    @apply bg-[var(--grey-c1)];
   }
 }

@@ -49,7 +49,11 @@ const LoginForm = () => {
             Esqueceu sua senha?
           </Link>
         </div>
-        <Button>Entrar</Button>
+        {loading ? (
+          <Button disabled>Entrando...</Button>
+        ) : (
+          <Button>Entrar</Button>
+        )}
         {error && <Error error={error} className="mt-8" />}
         <div className="flex items-center gap-12 mt-6 mb-6">
           <div className="flex-1 h-px bg-[var(--grey-b3)]" />

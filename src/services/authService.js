@@ -7,6 +7,11 @@ export const authService = {
     return data;
   },
 
+  register: async (credentials) => {
+    const data = await authApi.register(credentials);
+    return data;
+  },
+
   logout: () => {
     localStorage.removeItem('token');
   },

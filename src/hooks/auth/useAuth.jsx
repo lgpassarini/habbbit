@@ -9,13 +9,31 @@ export function useAuth() {
   const [error, setError] = React.useState(null);
   const navigate = useNavigate();
 
+  const handleAuthSuccess = (data) => {
+    // setUser(data.user);
+    localStorage.setItem('token', data.token);
+    navigate('/');
+  };
+
   const login = async (credentials) => {
     setLoading(true);
     setError(null);
     try {
       const data = await authService.login(credentials);
-      // setUser(data.user);
-      navigate('/');
+      handleAuthSuccess(data.user);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const register = async (credentials) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await authService.register(credentials);
+      handleAuthSuccess(data.user);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -29,5 +47,5 @@ export function useAuth() {
     navigate('/login');
   };
 
-  return { login, logout, loading, error };
+  return { login, register, logout, loading, error };
 }

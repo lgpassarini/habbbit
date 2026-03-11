@@ -21,11 +21,16 @@ const RegisterForm = () => {
   const handleSubmit = async function handleSubmit(e) {
     e.preventDefault();
 
+    const isFullNameValid = fullName.validate();
+    const isEmailValid = email.validate();
+    const isPasswordValid = password.validate();
+    const isConfirmPasswordValid = confirmPassword.validate();
+
     if (
-      !email.validate() ||
-      !password.validate() ||
-      !confirmPassword.validate() ||
-      !fullName.validate() ||
+      !isFullNameValid ||
+      !isEmailValid ||
+      !isPasswordValid ||
+      !isConfirmPasswordValid ||
       passwordError ||
       confirmPasswordError
     ) {

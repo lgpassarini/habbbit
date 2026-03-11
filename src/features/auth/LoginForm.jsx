@@ -16,7 +16,10 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email.validate() || !password.validate()) {
+    const isEmailValid = email.validate();
+    const isPasswordValid = password.validate();
+
+    if (!isEmailValid || !isPasswordValid) {
       return;
     }
 

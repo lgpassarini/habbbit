@@ -4,27 +4,33 @@ import { authService } from '../../services/authService';
 import { UserContext } from '@/context/UserStorage';
 
 export function useAuth() {
-  const { setUser, setLoggedIn } = React.useContext(UserContext);
+  const { setUser, setLoggedIn, setAuthLoading } =
+    React.useContext(UserContext);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
   const navigate = useNavigate();
 
   const handleAuthSuccess = (data) => {
-    console.log(data);
     setUser(data);
     setLoggedIn(true);
     navigate('/');
+  };
+
+  const removeUserData = () => {
+    authService.logout();
+    setUser(null);
+    setLoggedIn(false);
   };
 
   const login = async (credentials) => {
     setLoading(true);
     setError(null);
     try {
-      const data = await authService.login(credentials);
-      handleAuthSuccess(data.user);
+      const { user } = await authService.login(credentials);
+      handleAuthSuccess(user);
     } catch (err) {
-      authService.logout();
-      setError(err.message);
+      setError('Login failed.');
+      removeUserData();
     } finally {
       setLoading(false);
     }
@@ -34,33 +40,31 @@ export function useAuth() {
     setLoading(true);
     setError(null);
     try {
-      const data = await authService.register(credentials);
-      handleAuthSuccess(data.user);
+      const { user } = await authService.register(credentials);
+      handleAuthSuccess(user);
     } catch (err) {
-      authService.logout();
-      setError(err.message);
+      removeUserData();
+      setError('Registration failed.');
     } finally {
       setLoading(false);
     }
   };
 
   const logout = () => {
-    authService.logout();
-    setUser(null);
-    setLoggedIn(false);
+    removeUserData();
     navigate('/login');
   };
 
   const autoLogin = async () => {
     try {
-      const data = await authService.autoLogin();
-      if (data) {
-        handleAuthSuccess(data.user);
+      const { user } = await authService.autoLogin();
+      if (user) {
+        handleAuthSuccess(user);
       }
     } catch (err) {
-      authService.logout();
-      setUser(null);
-      setLoggedIn(false);
+      removeUserData();
+    } finally {
+      setAuthLoading(false);
     }
   };
 

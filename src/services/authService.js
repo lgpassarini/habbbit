@@ -20,7 +20,14 @@ export const authService = {
   autoLogin: async () => {
     const token = localStorage.getItem('token');
     if (!token) return null;
-    const data = await authApi.validateToken();
-    return data;
+
+    const validationData = await authApi.validateToken();
+
+    if (!validationData.valid) {
+      authService.logout();
+      return null;
+    }
+
+    return await authApi.getUser(validationData.user.id);
   },
 };

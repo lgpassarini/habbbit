@@ -22,6 +22,8 @@
     --ring: 0 0% 70%;
     --radius: 0.5rem;
     --blue-button: #2432CE;
+    --blue-border: #E6F4FF;
+    --blue-scrollbar: #0088E8;
     --grey-c6: #1C1D1D;   
     --grey-c5: #272828;   
     --grey-c4: #4b4c4c;   
@@ -60,12 +62,63 @@
   #root {
     background-color: var(--background);
   }
+
+  .dashboard {
+    display: grid;
+    grid-template-columns: 2.2fr 3fr 2.2fr;
+    grid-template-rows: 64px 440px 1fr;
+    grid-template-areas:
+      "totalTasks header profile"
+      "tasks score streak"
+      "habits progress progress";
+    gap: 15px;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .dashboard > div {
+    background-color: white;
+    border-radius: 16px;
+    padding: 30px;
+  }
+  
+  .totalTasks {
+    grid-area: totalTasks;
+  }
+
+  .tasks {
+    grid-area: tasks;
+  }
+
+  .header {
+    grid-area: header;
+  }
+
+  .profile {
+    grid-area: profile;
+  }
+
+  .score {
+    grid-area: score;
+  }
+
+  .streak {
+    grid-area: streak;
+  }
+
+  .habits {
+    grid-area: habits;
+  }
+
+  .progress {
+    grid-area: progress;
+  }
 }
 
 @layer components {
   .mainContainer {
     max-width: 1440px;
-    @apply mx-auto px-6 w-full;
+    @apply flex items-center mx-auto px-6 w-full;
   }
 
   .inputGroup {
@@ -90,5 +143,41 @@
 
   button:disabled {
     @apply bg-[var(--grey-c1)];
+  }
+
+  input[type='checkbox'] {
+    @apply w-6 h-6 rounded-md cursor-pointer border relative;
+    appearance: none;
+    border-color: var(--blue-button);
+  }
+
+  input[type='checkbox']:checked {
+    background-color: var(--blue-button);
+    border-color: var(--blue-button);
+  }
+
+  input[type='checkbox']:checked::before {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--blue-scrollbar);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #e5e5e5;
+    border-radius: 10px;
   }
 }

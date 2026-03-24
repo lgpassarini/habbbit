@@ -4,6 +4,7 @@ import useHabit from '@/hooks/habit/useHabit';
 import { FaPlus } from 'react-icons/fa6';
 import { FiEdit } from 'react-icons/fi';
 import Modal from '@/components/ui/Modal';
+import HabitForm from './HabitForm';
 
 const UserHabits = () => {
   const { userHabits, getUserHabits } = useHabit();
@@ -21,7 +22,9 @@ const UserHabits = () => {
           acceptButtonLabel="Criar"
           cancelButtonLabel="Cancelar"
           setModal={setCreateModal}
-        />
+        >
+          <HabitForm />
+        </Modal>
       )}
       <div className="h-full flex flex-col">
         <div className="p-[30px] flex-1 flex flex-col min-h-0">

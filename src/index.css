@@ -35,6 +35,7 @@
     --grey-b1: #f8faff;
     --green-active: #C5E9CD;
     --green-active-text: #1C4D27;
+    --green-success: #43B75D;
     --red-inactive: #EE443F;
     --red-inactive-text: #641D1A;
     --red-button: #641D1A;
@@ -152,18 +153,18 @@
     @apply bg-[var(--grey-c1)];
   }
 
-  input[type='checkbox'] {
+  .custom-checkbox {
     @apply w-6 h-6 rounded-md cursor-pointer border relative;
     appearance: none;
     border-color: var(--blue-button);
   }
 
-  input[type='checkbox']:checked {
+  .custom-checkbox:checked {
     background-color: var(--blue-button);
     border-color: var(--blue-button);
   }
 
-  input[type='checkbox']:checked::before {
+  .custom-checkbox:checked::before {
     content: '✓';
     position: absolute;
     color: white;

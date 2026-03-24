@@ -59,6 +59,7 @@ const DayHabitList = () => {
                   onChange={handleHabitCheck}
                   data-habit-id={habit.id}
                   checked={habit.checked}
+                  className="custom-checkbox"
                 />
                 <span
                   className={

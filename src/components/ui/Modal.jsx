@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@/components/ui/Button';
+import ButtonSecondary from '@/components/ui/ButtonSecondary';
 import { IoClose } from 'react-icons/io5';
 
 const Modal = ({
@@ -57,17 +58,14 @@ const Modal = ({
         showAcceptButton ||
         cancelButtonLabel ||
         showCancelButton ? (
-          <div className="w-full flex items-center justify-between mt-6">
+          <div className="w-full flex items-center mt-6 gap-2">
             {(cancelButtonLabel || showCancelButton) && (
-              <Button
-                onClick={handleClose}
-                className="w-[120px] bg-[var(--grey-c1)] hover:bg-[var(--grey-c1)]/90"
-              >
+              <ButtonSecondary className="flex-1" onClick={handleClose}>
                 {cancelButtonLabel || 'Cancelar'}
-              </Button>
+              </ButtonSecondary>
             )}
             {(acceptButtonLabel || showAcceptButton) && (
-              <Button className="w-[120px]">
+              <Button className="flex-1">
                 {acceptButtonLabel || 'Aceitar'}
               </Button>
             )}
